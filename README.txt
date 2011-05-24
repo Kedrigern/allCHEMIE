@@ -39,6 +39,6 @@ popřípadě je přiložen shellovský skript.
 2. Odkazy
 ---------
 Stránka projektu: 
-    http://anilinux.org/~keddie/allchemie
-Stránka s kompletní dokumentací: 
-    http://anilinux.org/~keddie/allchemie/manual
+    http://kedrigern.github.com/allCHEMIE
+Kompletní dokumentací: 
+    přiložena v PDF souborech v adresaři DOC/
