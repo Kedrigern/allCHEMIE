@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<!-- CSS based on template of Dandelion wiki engine by Radomir Dopieralski who released this
+	template under the terms of GNU GPL. http://dandelion.sheep.art.pl/ -->
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>prolog zapoctak - Ondřej „Kedrigern“ Profant</title>
+	<style type="text/css">
+html{font:96% sans-serif;background:#f7f7f7;line-height:1.4}
+body{color:#333}
+#wrapper{margin:auto;width:60em;position:relative}
+#header{padding:0px 0px 7px 0px}
+#content *{outline: 0}
+h1{margin-top:0px;}
+h1,h2,h3,h4,h5,h6{letter-spacing:0.05em;color:#1474CA;font-weight:normal}
+h2 span.par-edit,h3 span.par-edit,h4 span.par-edit,h5 span.par-edit,h6 span.par-edit{display:none}
+h2:hover span.par-edit,h3:hover span.par-edit,h4:hover span.par-edit,h5:hover span.par-edit,h6:hover span.par-edit{display:inline;font-size:x-small}
+a{color:#1474CA;text-decoration:none}
+a:visited{color:#1474CA}
+a.pending{color:#c174a0}
+a:hover{text-decoration:underline}
+a img{border:none}
+a.external:after{content: "\2197";}
+input,textarea{font-size:94%;border:1px solid #999;background:#fff;color:#666;outline:0.2em solid #eee;padding:0px;line-height:1.2;margin:0.5em;vertical-align:middle}
+textarea{display:block;margin:0.5em auto;width:100%}
+pre{padding:0.5em;margin:0.5em;border:1px solid #e0d78a;background:#fef4a4;color:#644e22;overflow:auto;outline:0.4em solid #eee !important;}
+img{border:1px solid #ccc;outline:0.25em solid #eee;padding:0.25em;margin:0.25em 0 0.25em 0.5em;background:#fff}
+hr{height:0;border:none;color:#fff;background:transparent;border-bottom:1px solid #ccc; margin:0.5em 0}
+#diff{outline:none;border:none;background:#fff;line-height:1.25;padding:1em;white-space:pre-wrap;word-wrap:break-word;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;width:97%}
+#diff ins{color:green;text-decoration:none;font-weight:bold}
+#diff del{color:red;text-decoration:line-through}
+hr{margin:10px 0 10px 0;height:0px;overflow:hidden;border:0px;border-top:2px solid #1474CA}
+.error{color:#F25A5A;font-weight:bold}
+form{display:inline}
+#contentTextarea{height:44em}
+#toc{margin:5px 0 5px 10px;padding:6px 5px 7px 0px;float:right;list-style:none;outline:0.4em solid #eee;background:#fef4a4;border:1px solid #e0d78a}
+#toc ul{list-style:none;padding:3px 0 3px 10px}
+#toc li{font-size:11px;padding-left:10px}
+.rc-diff, .rc-date, .rc-ip, .rc-size {font-size: smaller}
+/* Following are plugin specific styles */
+.pageVersionsList{letter-spacing:0px;font-variant:normal;font-size:12px}
+#renameForm{float:left}
+.clear{clear:both}
+.tagList{padding:0.2em 0.4em 0.2em 0.4em;margin-top:0.5em;border:1px dashed #e0d78a;background:#fef4a4;color:#644e22}
+.tagCloud{padding:0.4em 0.6em 0.4em 0.6em;float:right;width:200px;margin:1em;border:1px dashed #e0d78a;background:#fef4a4;color:#644e22}
+#fileTable{border-collapse:collapse}
+#fileTable td{border:1px solid #FEF4A4;padding:2px 6px 2px 6px}
+.comment-item{border:1px solid #999;color:#666;outline:0.2em solid #eee}
+.resizeTextareaDiv{margin-top: 5px}
+a.toolbarTextareaItem{padding-right: 10px}
+.wikitable{border-collapse:collapse}
+.wikitable td{border: 1px solid #DDDDDD;padding:1px 5px 1px 5px}
+	</style>
+
+	<div id="content">
+<div class="par-div" id="par-2"><h3 id="__vod">Úvod</h3>
+<p>Program allChemie vznikl jako zápočtový roku 2010 a je psán v jazyce Prolog. Slouží k základní práci se vzorci anorganické chemie. Přesněji řečeno má tyto základní možnosti užití:</p>
+<ol><li> Informace o jednotlivých prvcích</li><li> Koncovky českého názvosloví, řecké přípony etc.</li><li> Převod chem. vzorce na slovní vyjádření (CO<sub>2</sub> -> Oxid uhličitý)</li><li> Doplnění neúplného vzorce o možné prvky</li><li> Ze slovního vyjádření určí vzorec (Oxid uhličitý -> CO<sub>2</sub>)</li></ol>
+<p>Přičemž funkce 1-2 lze lehce dále rozšiřovat, viz.... Funkce 3 a 4 jsou primární a nejpropracovanější. Funkce 5 je spíše experimentální.</p>
+
+
+</div><div class="par-div" id="par-3"><h3 id="Instalace">Instalace<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=3">Editovat</a>)</span></h3>
+<div class="par-div" id="par-4"><h4 id="Linux">Linux<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=4">Editovat</a>)</span></h4>
+<p>Je třeba nainstalovat <a href="http://www.swi-prolog.org" class="external">swi-prolog</a>, např. v Debianu/Ubuntu:</p>
+<p><pre>sudo apt-get install swi-prolog</pre></p>
+<p>Ten pak spustíme příkazem:</p>
+<p><pre>prolog</pre></p>
+<p>pro náš program konkrétně:</p>
+<p><pre>prolog -q -f &lt;cesta_k_souboru/main.pl></pre></p>
+<p>(očekává se, že všechny soubory programu budou v dané složce)</p>
+</div><div class="par-div" id="par-5"><h4 id="Windows">Windows<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=5">Editovat</a>)</span></h4>
+<p>Stačí stáhnout a nainstalovat <a href="http://www.swi-prolog.org/download/stable/bin/w32pl5100.exe" class="external">swi-Prolog</a>, poté stáhnout <a href="index.php?page=prolog+zapoctak#Zdrojov___k__d">zdrojové kódy prologu</a>, rozbalit a kliknout na soubor "main". Program allChemie pak bude asociovat s Prologem, čili můžete začít pracovat s programem podle dalšího návodu. Správnou instalaci programu allChemie poznáte tak, že se po kliknutí na soubor "main" se zobrazí hlavička s nápisem CHEMIE a s možnostmi využití programu.</p>
+
+</div></div><div class="par-div" id="par-6"><h3 id="Z__kladn___u__it__">Základní užití<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=6">Editovat</a>)</span></h3>
+<div class="par-div" id="par-7"><h4 id="Predik__ty_v_Prologu">Predikáty v Prologu<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=7">Editovat</a>)</span></h4>
+<p><small><strong>Varování</strong>: Tato kapitola bude asi velmi těžko pochopitelná technicky méně zdatným uživatelům, ale při čtení dalšího textu bude velmi užitečná.</small></p>
+
+<p>Program není "klasickým" program, ale spíše "skriptem" pro jazyk Prolog. Je dobré uvědomit si několik základních faktů:</p>
+<ul><li> Spuštěním prologu se dostaneme do interaktivního prostředí, kde bude: "?- " a kurzor. V tomto prostředí zadáváme predikáty.</li><li> Predikát je "vlastně funkce": má název a za ním v závorce parametry</li><ul><li> Pokud ho zadáváme, tak za ním musíme napsat tečku.</li></ul><li> Enterem predikát potvrdíme a pak se Prolog pokusí vyhovět takovémuto predikátu. Pokud nám výsledek nevyhovuje můžeme zmáčknout středník a dostaneme další možnosti.</li><li> Parametry jsou:</li><ul><li> Velká písmena, což jsou proměnné, které chceme doplnit </li><li> Malá písmena, což jsou pevně daná fakta (data)</li><li> Podtržítko, což je taková proměnná, co nás nezajímá (anonymní)</li></ul></ul>
+
+
+</div><div class="par-div" id="par-8"><h4 id="Informace_o_jednotliv__ch_prvc__ch">Informace o jednotlivých prvcích<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=8">Editovat</a>)</span></h4>
+<p>Stačí zadat: <strong>vstup</strong>(Prvek), kde za Prvek dosadíte značku prvku malými písmeny, např:</p>
+<p><pre>vstup(h).</pre></p>
+<p>Pro vyhledávání dle více parametrů slouží predikát prvek, který má 6 parametrů. Ovládá se jako každý predikát v Prologu. Malé písmeno znamená pevně daný fakt (například parametr vyhledávání), velké písmeno znamená proměnnou (tedy to, co chceme najít) a podtržítko znamená údaj, který nás nezajímá. Syntaxe predikátu prvek je následující:</p>
+<p><pre>prvek( &lt;prot. cislo> , &lt;znacka> , &lt;nazev> , {kov,pol,nek} , &lt;skupina> , &lt;sezn. oxid. cisel>). </pre> </p>
+<p>, kde {} značí množinu - jsou zde právě tři možnosti. Čili použití následující:</p>
+<p><pre>prvek( 1 , h , vodik , _ , _ , X ).</pre></p>
+<p>V odpovědi se nám dostane X, které bude seznamem oxidačních čísel, kterých nabývá vodík, tedy:</p>
+<p><pre>X = [1].</pre></p>
+
+
+</div><div class="par-div" id="par-9"><h4 id="Koncovky___esk__ho_n__zvoslov__">Koncovky českého názvosloví<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=9">Editovat</a>)</span></h4>
+<p>Koncovky se používají obdobně jako predikát prvek z předchozí kapitoly. Používá se predikát koncovka, jehož syntaxe je následující:</p>
+<p><pre>koncovka( &lt;cislo> , &lt;pripon.> , &lt;pripon. kys> , &lt;pripon. sůl> ).</pre></p>
+
+</div><div class="par-div" id="par-10"><h4 id="P__evod_chem__vzorce_na_slovn___vyj__d__en__">Převod chem. vzorce na slovní vyjádření<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=10">Editovat</a>)</span></h4>
+<p>Zde je důležitý predikát vstup(), který je silně přetížený - tj. má proměnný počet parametrů (2-10). Stačí mu zadat kompletní vzorec (pro správnou funkci je třeba vyplnit všechna čísla vč. 1). Např:</p>
+<p><pre>vstup(h,2,o,1).                 voda
+vstup(c,1,o,2).                 oxid uhličitý
+vstup(cl,2,o,7).                oxid chloristý
+vstup(ba,1,(oh),2).             hydroxid barnatý
+vstup(h,1,f,1).                 flurovodík
+vstup(h,2,s,1,o,4).             kyselina sírová
+vstup(h,3,p,1,o,4).             kyselina trihydrogen fosforečná
+vstup(na,1,cl,1).               chlorid sodný
+vstup(k,1,n,1,o,3).             dusicnan draselný
+vstup(nh4,2,c,1,o,3).           uhlicitan amonný
+vstup(na,1,h,2,p,1,o,4,1).      dihydrogenfosforecnan sodný
+vstup(ca,1,s,1,o,4,1).          síran vápenatý
+vstup(ca,1,s,1,o,4,1,*,5,h2o).  pentahydrát síranu vápenatého
+</pre></p>
+<div class="par-div" id="par-11"><h5 id="Mal___pozn__mka_k_sol__m">Malá poznámka k solím</h5>
+<p><small>Amoniak (NH<sub>3</sub>), res jeho kationt (NH<sub>4</sub>) je považován za atom a vepisuje se vcelku.</small></p>
+<p><small>Poslední číslo u solí je obvykle dobrovolné a udává počet celé aniontové skupiny, např v: Ca<sub>1</sub>(SO<sub>4</sub>)<sub><strong>1</strong></sub> je to jedna.</small></p>
+<p>Některé sloučeniny mají nadefinované zjednodušené vzory, ale samozřejmě to také zvyšuje pravděpodobnost výskytu chyby, např:</p>
+<p><pre>vstup(h,2,o).          voda
+vstup(c,o,2).          oxid uhličitý
+vstup(h,f).            flurovodík
+vstup(ba,oh,2).        hydroxid barnatý
+vstup(h,2,s,o,4).      kyselina sírová</pre></p>
+</div><div class="par-div" id="par-12"><h5 id="Organika">Organika<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=12">Editovat</a>)</span></h5>
+<p>Z organiky jsou implementovány pouze nejjednodušší acyklické (bez cyklu) uhlovodíky:</p>
+<p><pre>vstup(c,1,h,1).      metan
+vstup(c,2,h,2).       etan
+...
+vstup(c,5,h,12).    pentan
+...
+vstup(c,10,h,22)     dekan</pre></p>
+
+
+
+
+</div></div><div class="par-div" id="par-13"><h4 id="Dopln__n___ne__pln__ho_vzorce_o_mo__n___prvky_a___etnosti">Doplnění neúplného vzorce o možné prvky a četnosti<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=13">Editovat</a>)</span></h4>
+<p>K této funkci je využíván samotný Prolog, stačí nahradit prvek proměnnou a Prolog již najde možné prvky.</p>
+<p><pre>vstup(X,1,o,2).
+X = c ;         oxid uhličitý
+X = n ;         oxid dusičitý
+X = si ;        oxid křemičitý
+X = s ;         oxid siřičitý
+...</pre></p>
+<p>Vynechat lze i více prvků, či četnost nějakého atomu.</p>
+</div><div class="par-div" id="par-14"><h4 id="Z_atom___slo_____slou__eninu">Z atomů složí sloučeninu<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=14">Editovat</a>)</span></h4>
+<p>Predikát <strong>sloz()</strong> jednoduše najde možné sloučeniny. Četnosti si doplňuje sám. </p>
+<p><pre>sloz(cl,na).
+chlorid sodný
+
+sloz(na,cl).
+chlorid sodný
+
+sloz(h,o).
+voda ;
+peroxid vodíku</pre></p>
+<p>Je připraven na četnost 2,3,4.</p>
+</div><div class="par-div" id="par-15"><h4 id="Ze_slovn__ho_vyj__d__en___ur_____vzorec">Ze slovního vyjádření určí vzorec<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=15">Editovat</a>)</span></h4>
+<p>Tato funkce je jen velmi experimentální. Občas určí sloučeninu, která numericky odpovídá, ale měla by být značena jinak.</p>
+
+</div></div><div class="par-div" id="par-16"><h3 id="Zn__m___probl__my__bugy_">Známé problémy (bugy)<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=16">Editovat</a>)</span></h3>
+<ul><li> <strong>Ze slovního vyjádření určí vzorec</strong> - funguje jen u nejjednodušších sloučenin. Později se stává komplikovanou kvůli nutnosti řešit složitější rovnice.</li></ul>
+
+
+</div><div class="par-div" id="par-17"><h3 id="Lze_pomoci_s_v__vojem_">Lze pomoci s vývojem?<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=17">Editovat</a>)</span></h3>
+<p>Samozřejmě, zasíláním nových problémů či rad. Popřípadě rozšířením souboru tabulka.pl o nové prvky.</p>
+</div><div class="par-div" id="par-18"><h3 id="Technick___informace">Technické informace<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=18">Editovat</a>)</span></h3>
+<div class="par-div" id="par-19"><h4 id="Pou__it___jazyky__knihovny_etc_">Použité jazyky, knihovny etc.<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=19">Editovat</a>)</span></h4>
+<p>Jazyk: <a href="http://en.wikipedia.org/wiki/Prolog" class="external">Prolog</a></p>
+<p>Dialekt: <a href="http://www.swi-prolog.org/" class="external">SWI</a></p>
+<p>Knihovny: <a href="http://www.swi-prolog.org/man/clpqr.html" class="external">CLPQR</a></p>
+
+</div><div class="par-div" id="par-20"><h4 id="Ostatn__">Ostatní<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=20">Editovat</a>)</span></h4>
+<p>Vyvíjeno a testováno na Linuxu (Ubuntu 10.04), v editoru <a href="index.php?page=vim">vim</a>.</p>
+</div></div><div class="par-div" id="par-21"><h3 id="Zdroje">Zdroje<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=21">Editovat</a>)</span></h3>
+<div class="par-div" id="par-22"><h4 id="Kni__n__">Knižní<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=22">Editovat</a>)</span></h4>
+<ul><li> Přehled středoškolské chemie, SPN, Praha 1999 (kolektiv)</li></ul>
+</div><div class="par-div" id="par-23"><h4 id="Software">Software<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=23">Editovat</a>)</span></h4>
+<ul><li> <a href="http://www.frantz.fi/software/gperiodic.php" class="external">GPeriodic</a> (GTK) periodická tabulka prvků</li></ul>
+
+</div><div class="par-div" id="par-24"><h4 id="Internetov__">Internetové<span class="par-edit">(<a href="index.php?action=edit&page=prolog+zapoctak&par=24">Editovat</a>)</span></h4>
+<ul><li> <a href="index.php?page=%3Ca+href%3D%22http%3A%2F%2Forganika.gfxs.cz%22+class%3D%22external%22%3Ehttp%3A%2F%2Forganika.gfxs.cz%3C%2Fa%3E&action=edit" class="pending"><a href="http://organika.gfxs.cz" class="external">http://organika.gfxs.cz</a></a> (html)</li><li> <a href="index.php?page=%3Ca+href%3D%22http%3A%2F%2Fwww.jergym.hiedu.cz%2F%7Ecanovm%2Fobjevite%2Fobjevite%2Ftabulka.html%22+class%3D%22external%22%3Ehttp%3A%2F%2Fwww.jergym.hiedu.cz%2F%7Ecanovm%2Fobjevite%2Fobjevite%2Ftabulka.html%3C%2Fa%3E&action=edit" class="pending"><a href="http://www.jergym.hiedu.cz/~canovm/objevite/objevite/tabulka.html" class="external">http://www.jergym.hiedu.cz/~canovm/objevite/objevite/tabulka.html</a></a> (html)</li><li> <a href="index.php?page=%3Ca+href%3D%22http%3A%2F%2Fwww.chem-web.info%22+class%3D%22external%22%3Ehttp%3A%2F%2Fwww.chem-web.info%3C%2Fa%3E&action=edit" class="pending"><a href="http://www.chem-web.info" class="external">http://www.chem-web.info</a></a> (html)</li><li> <a href="index.php?page=%3Ca+href%3D%22http%3A%2F%2Fwww.aristoteles.cz%2Fchemie%2Fchemie.php%22+class%3D%22external%22%3Ehttp%3A%2F%2Fwww.aristoteles.cz%2Fchemie%2Fchemie.php%3C%2Fa%3E&action=edit" class="pending"><a href="http://www.aristoteles.cz/chemie/chemie.php" class="external">http://www.aristoteles.cz/chemie/chemie.php</a></a> (html)</li><li> <a href="index.php?page=%3Ca+href%3D%22http%3A%2F%2Fdum.rvp.cz%2Fmaterialy%2Fstahnout.html%3Fs%3Dzakhrdta%22+class%3D%22external%22%3Ehttp%3A%2F%2Fdum.rvp.cz%2Fmaterialy%2Fstahnout.html%3Fs%3Dzakhrdta%3C%2Fa%3E&action=edit" class="pending"><a href="http://dum.rvp.cz/materialy/stahnout.html?s=zakhrdta" class="external">http://dum.rvp.cz/materialy/stahnout.html?s=zakhrdta</a></a> (odp)</li></ul>
+
+</div></div></div>
+</div>
+</body>
+</html>
