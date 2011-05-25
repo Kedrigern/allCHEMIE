@@ -14,4 +14,4 @@ if which prolog > /dev/null; then
 fi;
 
 echo "Je treba nainstalovat interpret Prologu. Budete potrebovat superuzivatelska (root) prava. Např:";
-echo -e "\tDebian, Ubuntu etc.:\n\t\tapt-get install prolog";
+echo -e "\tDebian, Ubuntu etc.:\n\t\tapt-get install swi-prolog";
