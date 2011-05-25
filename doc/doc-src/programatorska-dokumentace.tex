@@ -82,18 +82,19 @@ write('oxid '),write(Jmeno),write('-'),write(Koncovka).
 
 Aritmetika není zrovna silnou a oblíbenou stránkou Prologu. Celou dobu jsme vlastně pracovali s~textovými
 řetězci (včetně: \texttt{memeber(N,[1,2,3])}) a až speciální predikát \texttt{is()}\footnote{
-Dokumentace SWI-Prologu: http://www.swi-prolog.org/pldoc/man?predicate=is\%2f2}  převedl řetězce na čísla
-a začal s~nimi počítat. Jak vidíte, tak se chová normálně operátory jsou: \texttt{$+$}, \texttt{$-$}, \texttt{*},
-\texttt{/}, \texttt{//} (celočíselné), \texttt{=:=} (rovná se), \texttt{=\\=} (nerovná se).
+Dokumentace SWI-Prologu: 
+\href{http://www.swi-prolog.org/pldoc/refman/}{http://www.swi-prolog.org/pldoc/refman/}}
+převedl řetězce na čísla a~začal s~nimi počítat. Jak vidíte, tak se chová normálně operátory jsou: 
+\texttt{$+$}, \texttt{$-$}, \texttt{*}, \texttt{/}, \texttt{//} (celočíselné), \texttt{=:=} (rovná se), \texttt{=\\=} (nerovná se).
 
 \subsection{Kompletace}
 Nyní doděláme nezbytnosti okolo, ještě budeme potřebovat:
 \begin{verbatim}
-:-consult('tabulka.pl'). %pripoji tabulku prvků.
+:-consult('tabulka.pro'). %pripoji tabulku prvků.
 \end{verbatim}
 Celý kód bude tedy vypadat takto:
 \begin{verbatim}
-:-consult('tabulka.pl'). %pripoji tabulku prvků.
+:-consult('tabulka.pro'). %pripoji tabulku prvků.
 
 vstup( Prvek, N, o, M ) :-
    member(N,[1,2]),
@@ -109,11 +110,11 @@ vstup( Prvek, N, o, M ) :-
 \end{verbatim}
 
 Co s~kódem udělat? Otevřeme si libovolný textový editor (ve Windows třeba Notepad)
-a vložíme ho. Soubor uložíme např. jako \texttt{mujOxid.pl} a ve stejné složce máme
-soubor \texttt{tabulka.pl}. Pak již soubor \texttt{mujOxid.pl} stačí spustit v~Linuxu
+a vložíme ho. Soubor uložíme např. jako \texttt{mujOxid.pro} a ve stejné složce máme
+soubor \texttt{tabulka.pl}. Pak již soubor \texttt{mujOxid.pro} stačí spustit v~Linuxu
 z~terminálu:
 \begin{verbatim}
-prolog -f mujOxid.pl
+prolog -f mujOxid.pro
 \end{verbatim}
 ve Windows poklepáním na daný soubor. Samozřejmě je nutné mít nainstalovaný SWI-Prolog.
 

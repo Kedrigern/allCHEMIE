@@ -15,7 +15,7 @@ spoctiOxid(Prv, Np, No) :-
 	(No is(Prv / 2) , Np = 1);	%% N = 1 cili Leva / 2 je pocet kysliku (o)
 	(No =  Prv      , Np = 2).	%% N = 2 cili 		
 
-hydroxid(_) :- write('[info] Zadejte predikat hydroxid(prvek,koncovka). , tedy s dvema argumenty.').
+hydroxid(_) :- write('[info] Zadejte predikat hydroxid(prvek,koncovka). , tedy s dvema argumenty.'), fail.
 hydroxid(Prvek,Koncovka) :-
 	priponSt(Leva, Koncovka),
 	prvek(_, Sm, Prvek, _ , _,_),
@@ -31,13 +31,22 @@ peroxid(Prvek, Koncovka) :-
 	
 
 %% HALOGENIDY
-fluorid(Prvek, Koncovka) :- priponaSt( ,Koncovka).
-chlorid()
-bromid()
-jodid()
-sulfid()
-
-
+fluorid(Prvek, Koncovka) :- halogenidPom(Prvek,f, Koncovka).
+chlorid(Prvek, Koncovka) :- halogenidPom(Prvek,cl, Koncovka).
+bromid(Prvek, Koncovka)  :- halogenidPom(Prvek,b, Koncovka).
+jodid(Prvek, Koncovka)  :- halogenidPom(Prvek,i, Koncovka).
+sulfid(Prvek, Koncovka)  :- halogenidPom(Prvek,s, Koncovka).
+halogenid(H,Prvek,Koncovka) :-
+		( H = fluorid, fluorid(Prvek, Koncovka) ) ;
+		( H = chlorid, chlorid(Prvek, Koncovka) ) ;
+		( H = bromid, bromid(Prvek, Koncovka) ) ;
+		( H = jodid, jodid(Prvek, Koncovka) );
+		( H = sulfid, sulfid(Prvek, Koncovka) ).
+halogenidPom( Prvek, ZnackaHalogenu, Konccovka) :-
+	priponSt( K ,Koncovka),
+	prvek(_,P,Prvek,_,_,Sez ),
+	member(K,Sez),
+	!,write(P),write(f),write(K).
 
 %% KYSELINA vizualni podpora
 %%       i  -ii
@@ -66,6 +75,8 @@ spoctiKys(Leva, NH, MP, Ko) :- 		/* NH - pocet vodiku, MP - pocet kyselinotvorne
 %% 	  I  -I
 %%	Na Cl
 %%	  1  1
+
+
 
 
 %% pomocny predikat, ktery vypisuje cisla vetsi nez 1

@@ -26,12 +26,12 @@ K správné funkci programu je třeba mít nejprve nainstalovaný swi-Prolog (ji
 swi-Prolog pro windows: 
 http://www.swi-prolog.org/download/stable/bin/w32pl5100.exe
 Po naintstalování se budou zdrojové kódy již samy automaticky asociovat s Prologem.
-Stačí tedy spustit (poklepáním levým myšítkem) soubor main (main.pl, pokud máte zobrazeny koncovky).
+Stačí tedy spustit (poklepáním levým myšítkem) soubor main (main.pro, pokud máte zobrazeny koncovky).
 
 1.2 Linux - ze zdroj. kódů
 swi-Prolog najdete v repozitářích většiny distribucí.
 Program spustíte příkazem:
-prolog -q -f <cesta_k_souboru/main.pl>
+prolog -q -f <cesta_k_souboru/main.pro>
 popřípadě je přiložen shellovský skript.
 
 

@@ -199,8 +199,8 @@ vstup(P1,N1,h,Nh,P2,N2,o,N3,N4,*,N5,h2o) :- vstup(P1,N1,h,Nh,P2,N2,o,N3,N4,N5,h2
 %POMOCNE %PREDIKATY	5 %parametry
 %------------------
 vycisli(Co, Jmeno, Levo, Pravo, OxidCislo) :-
-	TP is(abs(Pravo * OxidCislo)),		
-	L is(TP // Levo),
+	TP is (abs(Pravo * OxidCislo)),		
+	L is (TP // Levo),
 	nabyvaOxCisla(Jmeno,L),
 	write(Co), write(' '), write(Jmeno),
 	priponSt(L,Kon), write('-'), write(Kon).

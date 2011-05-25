@@ -3,13 +3,13 @@
 \usepackage[czech]{babel}
 \usepackage{ifpdf}
 \usepackage{hyperref}
-\title{allCHEMIE -- Programátorská dokumentace}
+\title{allCHEMIE -- Uživatelská příručka}
 \author{Ondrej Profant}
 \date{\today}
 \ifpdf
 \hypersetup{
 	pdfauthor={Ondrej Profant},
-	pdftitle={allCHEMIE - Programátorská dokumentace},
+	pdftitle={allCHEMIE - Uživatelská příručka},
 }
 \fi
 \begin{document}
@@ -18,104 +18,132 @@
 \tableofcontents
 \newpage
 \section{Úvod}
-Celý program je velmi úzce spjat s~programovacím jazykem Prolog, který spadá do paradigmatu logického programování.
-To znamená, že kód se skládá z~predikátů nad databází již zadaných predikátů a snaží se doplnit všechny proměnné. 
-Nicméně věřím, že není nutné rozumnět Prologu pro to, aby jste si AllCHEMIi vylepšili či pochopili, co dělá.
-Zvlátště pak odborné části z~chemie jsou vysloveně jednoduché, složitější může být občas aritmetika dopočítávání sloučenin. 
+Program allChemie vznikl jako zápočtový roku 2010 a je psán v~jazyce Prolog. Slouží k~základní práci se vzorci převážně anorganické chemie. Přesněji řečeno má tyto základní možnosti užití:
+\begin{enumerate}
+\item Informace o~jednotlivých prvcích
+\item Koncovky českého názvosloví, řecké přípony etc.
+\item Převod chem. vzorce na slovní vyjádření (CO$_2$ -> Oxid uhličitý)
+\item Ze slovního vyjádření určí vzorec (Oxid uhličitý -> CO$_2$)
+\item Doplňování možností (CX$_N$ -> CO$_2$)
 
-Pokud Prolog znáte, tak celý kód je velmi jasně napsaný a nejsou v~něm žádné zaludnosti ani složitá rekurze.
-
-V~další kapitole je podrobně popsána tvorba predikátu pro výpočet oxidu.
-\section{Tvorba vlastního predikátu} 
-\subsection{Jednoduché podmínky}
-První a velmi důležitým rozhodnutím je, jak vlastně bude náš predikát deklarován. 
-Celý program dodržuje konvenci, že všechny výpočty jsou deklarovány jako predikát \texttt{vstup()}, ale
-jak určit jaké bude mít argumenty již není tak jednoduché. Pojďme si vytvořit pravidla pro oxidy.
-
-Oxid bude mít jistě 4 argumenty, dva budou prvky a dva počty výskytů. Navíc víme, že druhý prvek bude vždy
-kyslík. Oxid tedy bude zadefinován takto:
+\end{enumerate}
+\section{Instalace} 
+\subsection{Linux}
+Je třeba nainstalovat \href{swi-prolog}{http://www.swi-prolog.org/}, např. v~Debianu/Ubuntu:
+\begin{verbatim}
+sudo apt-get install swi-prolog
+\end{verbatim}
+Ten pak spustíme příkazem:
 
 \begin{verbatim}
-vstup( Prvek, N, o, M ). % zatim bez jakyhkoliv pravidel
+prolog
 \end{verbatim}
 
-Důležité je dodržovat zásady jazyka Prolog -- proměnná je vždy velkým písmenem. Za znakem procenta je komentář, tam
-si můžete napsat libovolnou poznámku. Dalším jednoduchým omezením (omezujeme množinu všech oxidů na ten, který nám byl zadán)
-jsou číselné rozsahy. Víme, že kationt se v~oxidu vyskytuje jednou nebo dvakrát a oxid může: 1,2,3,4,5,7. 
-To zapíšeme takto:
-
+to nás, ale úplně nezajímá. My chceme spustit konkrétně allCHEMII:
 \begin{verbatim}
-member(N,[1,2]),
-member(M,[1,2,3,4,5,7]),
+prolog -q -f <cesta_k_souboru/main.pro>
 \end{verbatim}
+(očekává se, že všechny soubory programu budou v~dané složce)
+\subsection{Windows}
+Stačí stáhnout a nainstalovat \href{swi-prolog}{http://www.swi-prolog.org/}, poté stáhnout zdrojové kódy programu, rozbalit a kliknout na soubor "main". Program allChemie pak bude asociovat s~Prologem, čili můžete začít pracovat s~programem podle dalšího návodu. Správnou instalaci programu allChemie poznáte tak, že se po kliknutí na soubor "main" se zobrazí hlavička s~nápisem CHEMIE a s~možnostmi využití programu.
+\section{Použití}
+\subsection{Predikáty v~Prologu}
+Varování: Tato kapitola bude asi velmi těžko pochopitelná technicky méně zdatným uživatelům, ale při čtení dalšího textu bude velmi užitečná.
 
-Další věcí, kterou můžeme snadno ověřit jsou informace o~prvku. Na to máme predikát \texttt{prvek()/6}. 
-U~oxidu ověříme, že prvek není v~A8 skupině a jakých může nabývat oxid. čísel. Také si rovnou najdeme jeho 
-plné jméno.
-
+Program není „klasickým program", ale spíše „skriptem" pro jazyk Prolog. Je dobré uvědomit si několik základních faktů:
+\begin{itemize}
+\item Spuštěním prologu se dostaneme do interaktivního prostředí, kde bude: „?- "~a kurzor. V~tomto prostředí zadáváme predikáty.
+\item Predikát je „vlastně funkce": má název a za ním v~závorce parametry
+\begin{itemize}
+\item Pokud ho zadáváme, tak za ním musíme napsat tečku.
+\end{itemize}
+\item Enterem predikát potvrdíme a pak se Prolog pokusí vyhovět takovémuto predikátu. Pokud nám výsledek nevyhovuje můžeme zmáčknout středník a dostaneme další možnosti.
+\item Parametry jsou:
+\begin{itemize}
+\item Velká písmena, což jsou proměnné, které chceme doplnit 
+\item Malá písmena, což jsou pevně daná fakta (data)
+\item Podtržítko, což je taková proměnná, co nás nezajímá (anonymní)
+\end{itemize}
+\end{itemize}
+\subsection{Informace o~jednotlivých prvcích}
+Stačí zadat: \texttt{vstup(Prvek)}, kde za Prvek dosadíte značku prvku malými písmeny, např:
 \begin{verbatim}
-prvek( _, Prvek, Jmeno, _, Sk, Cisla ),
-not(Sk == a8), % dulezite je male a v a8, jinak by se jednalo o promennou
+vstup(h).
 \end{verbatim}
-
-V~jiných případech ještě můžeme ověřit zda je prvek kov, polokov či nekov, zde to nemá smysl. A~nyni stačí
-již jen dopočítat zbylé oxidační číslo prvku.
-
-\subsection{Rovnice (vyčíslení)}
-Nejdříve budeme pokračovat v~předchozím příkladu vypočtu oxdidů a pak se zmíním o~obecnějších věcech.
-
-U~oxidu není složitého dopočítat poslední číslo, neb víme:
-
+Pro vyhledávání dle více parametrů slouží predikát prvek, který má 6 parametrů. Ovládá se jako každý predikát v~Prologu. Malé písmeno znamená pevně daný fakt (například parametr vyhledávání), velké písmeno znamená proměnnou (tedy to, co chceme najít) a podtržítko znamená údaj, který nás nezajímá. Syntaxe predikátu prvek je následující:
 \begin{verbatim}
-Pstrana is(abs(-2*M)), %absolutni hod. prave strany
-X is(Pstrana / N), % (Lstrana := X*N) == Pstrana
-nabyvaOxCisla(Jmeno,X),
+prvek( <prot. cislo> , <znacka> , <nazev> , {kov,pol,nek} , <skupina> , <sezn. oxid. cisel>). 
 \end{verbatim}
-
-Pokud dojdeme až sem, tak jsme korektně vypočíslili oxid, nyní ho stačí vypsat:
-
+, kde \{\} značí množinu - jsou zde právě tři možnosti. Čili použití následující:
 \begin{verbatim}
-!, %tzv. řez, zabraní Prologu hledat další alternativy
-priponSt(X,Koncovka), 
-write('oxid '),write(Jmeno),write('-'),write(Koncovka).
+prvek( 1 , h , vodik , _ , _ , X ).
 \end{verbatim}
-
-Aritmetika není zrovna silnou a oblíbenou stránkou Prologu. Celou dobu jsme vlastně pracovali s~textovými
-řetězci (včetně: \texttt{memeber(N,[1,2,3])}) a až speciální predikát \texttt{is()}\footnote{
-Dokumentace SWI-Prologu: http://www.swi-prolog.org/pldoc/man?predicate=is\%2f2}  převedl řetězce na čísla
-a začal s~nimi počítat. Jak vidíte, tak se chová normálně operátory jsou: \texttt{$+$}, \texttt{$-$}, \texttt{*},
-\texttt{/}, \texttt{//} (celočíselné), \texttt{=:=} (rovná se), \texttt{=\\=} (nerovná se).
-
-\subsection{Kompletace}
-Nyní doděláme nezbytnosti okolo, ještě budeme potřebovat:
+V~odpovědi se nám dostane \texttt{X}, které bude seznamem oxidačních čísel, kterých nabývá vodík, tedy:
 \begin{verbatim}
-:-consult('tabulka.pl'). %pripoji tabulku prvků.
+X = [1].
 \end{verbatim}
-Celý kód bude tedy vypadat takto:
+
+\subsection{Koncovky českého názvosloví}
+Koncovky se používají obdobně jako predikát prvek z~předchozí kapitoly. Používá se predikát koncovka, jehož syntaxe je následující:
 \begin{verbatim}
-:-consult('tabulka.pl'). %pripoji tabulku prvků.
-
-vstup( Prvek, N, o, M ) :-
-   member(N,[1,2]),
-   member(M,[1,2,3,4,5,7]),
-   prvek( _, Prvek, Jmeno, _, Sk, Cisla ),
-   not(Sk == a8), % dulezite je male a v a8, jinak by se jednalo o promennou
-   Pstrana is(abs(-2*M)), %absolutni hod. prave strany
-   X is(Pstrana / N), % (Lstrana := X*N) == Pstrana
-   nabyvaOxCisla(Jmeno,X),
-   !, %tzv. řez, zabraní Prologu hledat další alternativy
-   priponSt(X,Koncovka), 
-   write('oxid '),write(Jmeno),write('-'),write(Koncovka).
+koncovka( <cislo> , <pripon.> , <pripon. kys> , <pripon. sůl> ).
 \end{verbatim}
-
-Co s~kódem udělat? Otevřeme si libovolný textový editor (ve Windows třeba Notepad)
-a vložíme ho. Soubor uložíme např. jako \texttt{mujOxid.pl} a ve stejné složce máme
-soubor \texttt{tabulka.pl}. Pak již soubor \texttt{mujOxid.pl} stačí spustit v~Linuxu
-z~terminálu:
+\subsection{Převod chem. vzorce na slovní vyjádření}
+Zde je důležitý predikát \texttt{vstup()}, který je silně přetížený - tj. má proměnný počet parametrů (2-10). Stačí mu zadat kompletní vzorec (pro správnou funkci je třeba vyplnit všechna čísla vč. 1). Např:
 \begin{verbatim}
-prolog -f mujOxid.pl
+vstup(h,2,o,1).                 voda
+vstup(c,1,o,2).                 oxid uhličitý
+vstup(cl,2,o,7).                oxid chloristý
+vstup(ba,1,(oh),2).             hydroxid barnatý
+vstup(h,1,f,1).                 flurovodík
+vstup(h,2,s,1,o,4).             kyselina sírová
+vstup(h,3,p,1,o,4).             kyselina trihydrogen fosforečná
+vstup(na,1,cl,1).               chlorid sodný
+vstup(k,1,n,1,o,3).             dusicnan draselný
+vstup(nh4,2,c,1,o,3).           uhlicitan amonný
+vstup(na,1,h,2,p,1,o,4,1).      dihydrogenfosforecnan sodný
+vstup(ca,1,s,1,o,4,1).          síran vápenatý
+vstup(ca,1,s,1,o,4,1,*,5,h2o).  pentahydrát síranu vápenatého
 \end{verbatim}
-ve Windows poklepáním na daný soubor. Samozřejmě je nutné mít nainstalovaný SWI-Prolog.
+Některé sloučeniny mají nadefinované zjednodušené vzory, ale samozřejmě to také zvyšuje pravděpodobnost výskytu chyby (res. špatné interpretace), např:
+\begin{verbatim}
+vstup(h,2,o).          voda
+vstup(c,o,2).          oxid uhličitý
+vstup(h,f).            flurovodík
+vstup(ba,oh,2).        hydroxid barnatý
+vstup(h,2,s,o,4).      kyselina sírová
+\end{verbatim}
+\subsubsection{Malá poznámka k~solím}
+Amoniak (NH3), res jeho kationt (NH4) je považován za atom a vepisuje se vcelku.
 
-\section{Soubory a logické členění programu}
+Poslední číslo u~solí je obvykle dobrovolné a udává počet celé aniontové skupiny, např v: \texttt{Ca$_1$(SO$_4$)$_1$} je to jedna.
+\subsection{Organika}
+\subsection{Doplnění neúplného vzorce o~možné prvky a četnosti}
+K~této funkci je využíván samotný Prolog, stačí nahradit prvek proměnnou a Prolog již najde možné prvky.
+\begin{verbatim}
+vstup(X,1,o,2).
+X = c ;         oxid uhličitý
+X = n ;         oxid dusičitý
+X = si ;        oxid křemičitý
+X = s ;         oxid siřičitý
+...
+\end{verbatim}
+Vynechat lze i více prvků, či četnost nějakého atomu.
+\subsection{Skládání sloučenin}
+Predikát \texttt{sloz()} jednoduše najde možné sloučeniny. Četnosti si doplňuje sám. 
+\begin{verbatim}
+sloz(cl,na).
+chlorid sodný
+
+sloz(na,cl).
+chlorid sodný
+
+sloz(h,o).
+voda ;
+peroxid vodiku.
+\end{verbatim}
+Je připraven na četnost 2,3,4.
+\section{Známé problémy}
+\section{Otázky a odpovědi (FAQ)}
+\section{Zdroje}
 \end{document}

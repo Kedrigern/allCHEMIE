@@ -1,24 +1,23 @@
-%#       This program is free software; you can redistribute it and/or modify
-%#       it under the terms of the GNU General Public License as published by
-%#       the Free Software Foundation; either version 2 of the License, or
-%#       (at your option) any later version.
-%#       
-%#       This program is distributed in the hope that it will be useful,
-%#       but WITHOUT ANY WARRANTY; without even the implied warranty of
-%#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%#       GNU General Public License for more details.
-%#       
-%#       You should have received a copy of the GNU General Public License
-%#       along with this program; if not, write to the Free Software
-%#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-%#       MA 02110-1301, USA.
-%#       
+%       This program is free software; you can redistribute it and/or modify
+%       it under the terms of the GNU General Public License as published by
+%       the Free Software Foundation; either version 2 of the License, or
+%       (at your option) any later version.
+%       
+%       This program is distributed in the hope that it will be useful,
+%       but WITHOUT ANY WARRANTY; without even the implied warranty of
+%       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%       GNU General Public License for more details.
+%       
+%       You should have received a copy of the GNU General Public License
+%       along with this program; if not, write to the Free Software
+%       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+%       MA 02110-1301, USA.       
 
 /*	DataBase */
-:- consult('./tabulka.pl').
-:- consult('./parser.pl').
-:- consult('./nazvy.pl').
-:- consult('./kompozer.pl').
+:- consult('./tabulka.pro').
+:- consult('./parser.pro').
+:- consult('./nazvy.pro').
+:- consult('./kompozer.pro').
 
 /*	KONTAKT S UZIVATELEM */
 
@@ -91,9 +90,9 @@ help(5) :- write('# 5: Pro zakladni anorganicke slouceniny jsou nadefinovany pre
  	write(' ?- oxid(uhlik,icity)'), tab(3), write('dostaname odpoved: c1o2 , nebo:'), nl, 
  	write(' ?- hydroxid(draslik,ny).'), tab(3), write('dostaneme odpoved: k(oh)1'), nl, nl.
 
-help(6) :- write('INFO: Program vznikl roku 2010-2011 jako zapoctovy na cvicenich z neproceduralniho programovani na MFF UK pod vedenim Rudolfa Kryla, kteremu za to patri velke podekovani. Je vice nastinem algoritmu v Prologu pro danou ulohu, nez zcela presnym nastrojem pro urcovani vzorcu - nicmene neni problem v jeho rozvoji pokracovat. Homepage programu: www.anilinux.org/~keddie/allchemie , program je siren zcela svobodne.'),nl,
-	write('K vytvoreni byl pouzit OS Linux, sada nastroju GNU a textovy editor vim. Testovan primarne v swi-Prologu: http://www.swi-prolog.org'), 
-	nl, nl, write('Autor: Ondrej Profant < ondrej.profant -at- gmail.com >, www.anilinux.org/~keddie'), nl, nl.
+help(6) :- write('INFO: Program vznikl roku 2010-2011 jako zapoctovy na cvicenich z neproceduralniho programovani na MFF UK pod vedenim Rudolfa Kryla, kteremu za to patri velke podekovani. Je vice nastinem algoritmu v Prologu pro danou ulohu, nez zcela presnym nastrojem pro urcovani vzorcu - nicmene neni problem v jeho rozvoji pokracovat. Homepage programu: http://kedrigern.github.com/allCHEMIE , program je siren zcela svobodne (GPL licence].'),nl,
+	write('K vytvoreni byl pouzit OS Linux, sada nastroju GNU, textovy editor vim a nastroj pro správu verzí git. Testovan primarne v swi-Prologu: http://www.swi-prolog.org'), 
+	nl, nl, write('Autor: Ondrej Profant < ondrej.profant -at- gmail.com >, http://kedrigern.github.com/allCHEMIE'), nl, nl.
 
 help(7) :- 	member(N,[0,1,2,3,4,5,6]),
 		help(N), fail.
