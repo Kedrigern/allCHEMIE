@@ -22,9 +22,9 @@ Program allChemie vznikl jako zápočtový roku 2010 a je psán v~jazyce Prolog.
 \begin{enumerate}
 \item Informace o~jednotlivých prvcích
 \item Koncovky českého názvosloví, řecké přípony etc.
-\item Převod chem. vzorce na slovní vyjádření (CO$_2$ -> Oxid uhličitý)
-\item Ze slovního vyjádření určí vzorec (Oxid uhličitý -> CO$_2$)
-\item Doplňování možností (CX$_N$ -> CO$_2$)
+\item Převod chem. vzorce na slovní vyjádření (CO$_2$ $\rightarrow$ Oxid uhličitý)
+\item Ze slovního vyjádření určí vzorec (Oxid uhličitý $\rightarrow$ CO$_2$)
+\item Doplňování možností (CX$_N$ $\rightarrow$ CO$_2$)
 
 \end{enumerate}
 \section{Instalace} 
@@ -72,7 +72,8 @@ vstup(h).
 \end{verbatim}
 Pro vyhledávání dle více parametrů slouží predikát prvek, který má 6 parametrů. Ovládá se jako každý predikát v~Prologu. Malé písmeno znamená pevně daný fakt (například parametr vyhledávání), velké písmeno znamená proměnnou (tedy to, co chceme najít) a podtržítko znamená údaj, který nás nezajímá. Syntaxe predikátu prvek je následující:
 \begin{verbatim}
-prvek( <prot. cislo> , <znacka> , <nazev> , {kov,pol,nek} , <skupina> , <sezn. oxid. cisel>). 
+prvek( <prot. cislo> , <znacka> , <nazev> , {kov,pol,nek} , 
+	   <skupina> , <sezn. oxid. cisel>). 
 \end{verbatim}
 , kde \{\} značí množinu - jsou zde právě tři možnosti. Čili použití následující:
 \begin{verbatim}
@@ -105,6 +106,8 @@ vstup(na,1,h,2,p,1,o,4,1).      dihydrogenfosforecnan sodný
 vstup(ca,1,s,1,o,4,1).          síran vápenatý
 vstup(ca,1,s,1,o,4,1,*,5,h2o).  pentahydrát síranu vápenatého
 \end{verbatim}
+Poznámka: Program neimplementuje české znaky a morfologii (ohýbání a skládání slov), čili vypisuje zjednodušeně uhlik-icity, namísto uhličitý. V~manuálu uvádím plné názvy pro přehlednost.
+
 Některé sloučeniny mají nadefinované zjednodušené vzory, ale samozřejmě to také zvyšuje pravděpodobnost výskytu chyby (res. špatné interpretace), např:
 \begin{verbatim}
 vstup(h,2,o).          voda
@@ -117,7 +120,34 @@ vstup(h,2,s,o,4).      kyselina sírová
 Amoniak (NH3), res jeho kationt (NH4) je považován za atom a vepisuje se vcelku.
 
 Poslední číslo u~solí je obvykle dobrovolné a udává počet celé aniontové skupiny, např v: \texttt{Ca$_1$(SO$_4$)$_1$} je to jedna.
-\subsection{Organika}
+\subsubsection{Organika}
+Implementována je jen základní řada do \texttt{c$_19$h$_40$} a její uhlíkové zbytky. Obsluhuje se stejně jako v~předchozích příkladech:
+\begin{verbatim}
+?- vstup(c,1,h,4).
+metan
+?- vstup(c,1,h,3).
+metyl
+?- vstup(c,5,h,12).
+penta-an
+?- vstup(c,5,h,11).
+penta-yl
+\end{verbatim}
+\subsection{Převod slovního vyjádření na chem. vzorec}
+Pro sloučeniny jsou připraveny spec. predikáty. Nejjednoduší bude ukázat to na příkladech:
+\begin{verbatim}
+?- oxid(uhlik,icity).
+co2
+?- oxid(lithium,ny).
+li2o
+?- fluorid(draslik,ny).
+kf
+?- bromid(sodik,ny).
+nabr
+?- kyselina(brom,na).
+hbro
+\end{verbatim}
+
+
 \subsection{Doplnění neúplného vzorce o~možné prvky a četnosti}
 K~této funkci je využíván samotný Prolog, stačí nahradit prvek proměnnou a Prolog již najde možné prvky.
 \begin{verbatim}
@@ -144,6 +174,27 @@ peroxid vodiku.
 \end{verbatim}
 Je připraven na četnost 2,3,4.
 \section{Známé problémy}
+AllCHEMIE zcela jistě obsahuje velké množství chyb. Je to zapříčiněno těmito fakty:
+\begin{enumerate}
+\item Autor není chemik a jen velmi omezeně konzultoval s~chemiky.
+\item Ne vše je v~chemii tak pravidelné, jak by se mohlo zdát.
+\item Jedná se o~zápočtový projekt s~omezenými časovými možnostmi (účelem je napsat program v~Prologu, nikoliv ošetřit každou nepravidelnost).
+\end{enumerate}
+
 \section{Otázky a odpovědi (FAQ)}
+Q: Mohou se v~programu vyskytovat chyby:\\
+A: Samozřejmě.
+
+\medskip
+
+Q: Je možné studovat zdrojový kód?\\
+A: Ano, program má plně otevřený kód, koneckonců je distribuován pouze formou kódu.
+
+\medskip
+
+Q: Je možné přispívat svými vylepšeními?\\
+A: Ano, celý projekt je spravován skrze GIT\footnote{Systém pro správu verzí.} na \href{github.com}{github.com}, stačí se připojit:
+\href{http://kedrigern.github.com/allCHEMIE/}{http://kedrigern.github.com/allCHEMIE/}
 \section{Zdroje}
+Viz. specifikace.
 \end{document}

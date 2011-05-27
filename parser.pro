@@ -29,16 +29,29 @@ vstup(h, Prvek)     :- vstup(h, 1, Prvek, 1).
 %ORGANIKA
 %--------
 vstup(c,1,h,4)  :- write(metan).
+vstup(c,1,h,3)  :- write(metyl).
 vstup(c,2,h,6)  :- write(etan).
+vstup(c,2,h,5)	:- write(ethyl).
 vstup(c,3,h,8)  :- write(propan).
+vstup(c,3,h,7)  :- write(propyl).
 vstup(c,4,h,10) :- write(butan).
+vstup(c,4,h,9)  :- write(butyl).
 vstup(c,11,h,24):- write(undekan). 
 vstup(c,12,h,26):- write(dodekan).
-vstup(c,N1,h,N2) :-
-	N2 is (N1 * 2 + 2),
-	reckaPred(N1,Pred), write(Pred),
-	(N1 =< 10, write('-an'))   ;	
-	(N1 =< 19, write('-dekan')).
+vstup(c,N1,h,N2) :- 
+	(
+		N2 is (N1*2+2),
+		reckaPred(N1,Pred), 
+		write(Pred),(
+		(N1 =< 10, write('-an'))   ;	
+		(N1 =< 19, write('-dekan')))
+	) ;
+	(
+		N2 is (N1*2+1),
+		reckaPred(N1,Pred), write(Pred),
+		(N1 =< 10, write('-yl'))   ;	
+		(N1 =< 19, write('-dekan-yl'))
+	).
 		
 %-----------------
 %ZVLASTNI %PRIPADY 	4,4 %parametry
@@ -114,8 +127,7 @@ vstup(Prvek, 1, Halogen, M) :-
 		(Halogen == s , Co = sulfid)
 	),
 	prvek(_ , Prvek, Jmeno, _, _ ,_),
-	vycisli(Co, Jmeno, N, M, -1).	
-
+	vycisli(Co, Jmeno,1, M, -1).	
 
 
 %--------
@@ -204,26 +216,3 @@ vycisli(Co, Jmeno, Levo, Pravo, OxidCislo) :-
 	nabyvaOxCisla(Jmeno,L),
 	write(Co), write(' '), write(Jmeno),
 	priponSt(L,Kon), write('-'), write(Kon).
-
-
-/* zakladni anionty */
-aniont(s ,1 ,o, 3,siricitan,-2).
-aniont(s ,1 ,o, 4,siran,-2).
-aniont(c ,1 ,o, 3,uhlicitan,-2).
-aniont(p ,1 ,o, 4,fosforecnan,-3).
-aniont(n ,1 ,o, 2,dusitan,-1).
-aniont(n ,1 ,o, 3,dusicnan,-1).
-aniont(mn,1 ,o, 4,manganistan,-1).
-aniont(cr,1 ,o, 4,chroman,-2).
-aniont(cr,2 ,o, 4,dichroman,-2).
-aniont(se,1 ,o, 4,selenan,-2).
-aniont(cl,1 ,o, 4,chloristan,-1).
-aniont(te,1 ,o, 3,teluricitan,-2).
-aniont(cl,1 ,o, 1,chlornan,-1).
-aniont(cl,1 ,o, 1,chlorecnan,-1).
-aniont(P1,N1,o,N2,Jmeno,OxC) :-                                         /* Obecny, atomy, vyskyty a celkove ox. c. */
-        PrvOxC is((2*N2 + OxC)//N1),                                    /* ox. cislo prvku */
-        prvek(_,P1,Jm,_,_,_),
-        nabyvaOxCisla(P1,PrvOxC),
-        priponSul(PrvOxC,Konc),
-        string_concat(Jm,Konc,Jmeno).

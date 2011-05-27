@@ -18,6 +18,7 @@
 :- consult('./parser.pro').
 :- consult('./nazvy.pro').
 :- consult('./kompozer.pro').
+:- consult('./anionty.pro').
 
 /*	KONTAKT S UZIVATELEM */
 

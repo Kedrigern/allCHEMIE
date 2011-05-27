@@ -22,31 +22,36 @@ hydroxid(Prvek,Koncovka) :-
 	nabyvaOxCisla(Sm,Leva),
 	!,write(Sm), write('(oh)'), vypis(Leva).
 
-peroxid(_).
+%% PEROXID
+peroxid(_) :- write('[info] Zadejte predikat peroxid(prvek,koncovka). , tedy s dvema argumenty.'), fail.
 peroxid(Prvek, Koncovka) :- 
-	priponaSt(Leva,Koncovka),
+	priponSt(Leva,Koncovka),
         prvek(_, Sm, Prvek,_,_,_),      %% zjistim jaky je to prvek
 	nabyvaOxCisla(Sm,Leva),         %% overim oxid. cislo
-	!,write(Sm), vypis(Leva), write(o), vzpis(Leva).
+	(
+		(Leva =:= 2, N is 2);
+		(N is 2)
+	),
+	!,write(Sm), vypis(N), write(o), vypis(N).
 	
 
 %% HALOGENIDY
 fluorid(Prvek, Koncovka) :- halogenidPom(Prvek,f, Koncovka).
 chlorid(Prvek, Koncovka) :- halogenidPom(Prvek,cl, Koncovka).
-bromid(Prvek, Koncovka)  :- halogenidPom(Prvek,b, Koncovka).
+bromid(Prvek, Koncovka)  :- halogenidPom(Prvek,br, Koncovka).
 jodid(Prvek, Koncovka)  :- halogenidPom(Prvek,i, Koncovka).
-sulfid(Prvek, Koncovka)  :- halogenidPom(Prvek,s, Koncovka).
+pesulfid(Prvek, Koncovka)  :- halogenidPom(Prvek,s, Koncovka).
 halogenid(H,Prvek,Koncovka) :-
 		( H = fluorid, fluorid(Prvek, Koncovka) ) ;
 		( H = chlorid, chlorid(Prvek, Koncovka) ) ;
 		( H = bromid, bromid(Prvek, Koncovka) ) ;
 		( H = jodid, jodid(Prvek, Koncovka) );
 		( H = sulfid, sulfid(Prvek, Koncovka) ).
-halogenidPom( Prvek, ZnackaHalogenu, Konccovka) :-
+halogenidPom( Prvek, ZnackaHalogenu, Koncovka) :-
 	priponSt( K ,Koncovka),
 	prvek(_,P,Prvek,_,_,Sez ),
 	member(K,Sez),
-	!,write(P),write(f),write(K).
+	!,write(P),write(ZnackaHalogenu),write(K).
 
 %% KYSELINA vizualni podpora
 %%       i  -ii
