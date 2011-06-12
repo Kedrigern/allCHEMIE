@@ -34,21 +34,19 @@ Je třeba nainstalovat \href{swi-prolog}{http://www.swi-prolog.org/}, např. v~D
 sudo apt-get install swi-prolog
 \end{verbatim}
 Ten pak spustíme příkazem:
-
 \begin{verbatim}
 prolog
 \end{verbatim}
-
 to nás, ale úplně nezajímá. My chceme spustit konkrétně allCHEMII:
 \begin{verbatim}
 prolog -q -f <cesta_k_souboru/main.pro>
 \end{verbatim}
 (očekává se, že všechny soubory programu budou v~dané složce)
 \subsection{Windows}
-Stačí stáhnout a nainstalovat \href{swi-prolog}{http://www.swi-prolog.org/}, poté stáhnout zdrojové kódy programu, rozbalit a kliknout na soubor "main". Program allChemie pak bude asociovat s~Prologem, čili můžete začít pracovat s~programem podle dalšího návodu. Správnou instalaci programu allChemie poznáte tak, že se po kliknutí na soubor "main" se zobrazí hlavička s~nápisem CHEMIE a s~možnostmi využití programu.
+Stačí stáhnout a nainstalovat \href{swi-prolog}{http://www.swi-prolog.org/}, poté stáhnout zdrojové kódy programu, rozbalit a kliknout na soubor "main"\footnote{Pokud máte v~systému nastavené zobrazování přípon, tak bude zobrazeno "prolog.pro".}. Program allChemie pak bude asociovat s~Prologem, čili můžete začít pracovat s~programem podle dalšího návodu. Správnou instalaci programu allChemie poznáte tak, že se po kliknutí na soubor "main" zobrazí hlavička s~nápisem CHEMIE a s~možnostmi využití programu.
 \section{Použití}
 \subsection{Predikáty v~Prologu}
-Varování: Tato kapitola bude asi velmi těžko pochopitelná technicky méně zdatným uživatelům, ale při čtení dalšího textu bude velmi užitečná.
+\emph{Varování: Tato kapitola bude asi velmi těžko pochopitelná technicky méně zdatným uživatelům, ale při čtení dalšího textu bude velmi užitečná.}
 
 Program není „klasickým program", ale spíše „skriptem" pro jazyk Prolog. Je dobré uvědomit si několik základních faktů:
 \begin{itemize}
@@ -66,16 +64,16 @@ Program není „klasickým program", ale spíše „skriptem" pro jazyk Prolog.
 \end{itemize}
 \end{itemize}
 \subsection{Informace o~jednotlivých prvcích}
-Stačí zadat: \texttt{vstup(Prvek)}, kde za Prvek dosadíte značku prvku malými písmeny, např:
+Stačí zadat: \texttt{vstup(Prvek).}, kde za Prvek dosadíte značku prvku malými písmeny, např:
 \begin{verbatim}
 vstup(h).
 \end{verbatim}
 Pro vyhledávání dle více parametrů slouží predikát prvek, který má 6 parametrů. Ovládá se jako každý predikát v~Prologu. Malé písmeno znamená pevně daný fakt (například parametr vyhledávání), velké písmeno znamená proměnnou (tedy to, co chceme najít) a podtržítko znamená údaj, který nás nezajímá. Syntaxe predikátu prvek je následující:
 \begin{verbatim}
 prvek( <prot. cislo> , <znacka> , <nazev> , {kov,pol,nek} , 
-	   <skupina> , <sezn. oxid. cisel>). 
+	   <skupina> , <sezn. oxid. cisel> ). 
 \end{verbatim}
-, kde \{\} značí množinu - jsou zde právě tři možnosti. Čili použití následující:
+, kde \{\} značí množinu -- jsou zde právě tři možnosti. Čili použití následující:
 \begin{verbatim}
 prvek( 1 , h , vodik , _ , _ , X ).
 \end{verbatim}
@@ -90,10 +88,11 @@ Koncovky se používají obdobně jako predikát prvek z~předchozí kapitoly. P
 koncovka( <cislo> , <pripon.> , <pripon. kys> , <pripon. sůl> ).
 \end{verbatim}
 \subsection{Převod chem. vzorce na slovní vyjádření}
-Zde je důležitý predikát \texttt{vstup()}, který je silně přetížený - tj. má proměnný počet parametrů (2-10). Stačí mu zadat kompletní vzorec (pro správnou funkci je třeba vyplnit všechna čísla vč. 1). Např:
+Zde je důležitý predikát \texttt{vstup()}, který je silně přetížený -- tj. má proměnný počet parametrů (2-10). Stačí mu zadat kompletní vzorec (pro správnou funkci je třeba vyplnit všechna čísla vč. 1). Např:
 \begin{verbatim}
 vstup(h,2,o,1).                 voda
 vstup(c,1,o,2).                 oxid uhličitý
+vstup(c,1,o,3).	                false.  % program nezna odpovidajici slouceninu
 vstup(cl,2,o,7).                oxid chloristý
 vstup(ba,1,(oh),2).             hydroxid barnatý
 vstup(h,1,f,1).                 flurovodík
@@ -121,7 +120,7 @@ Amoniak (NH3), res jeho kationt (NH4) je považován za atom a vepisuje se vcelk
 
 Poslední číslo u~solí je obvykle dobrovolné a udává počet celé aniontové skupiny, např v: \texttt{Ca$_1$(SO$_4$)$_1$} je to jedna.
 \subsubsection{Organika}
-Implementována je jen základní řada do \texttt{c$_19$h$_40$} a její uhlíkové zbytky. Obsluhuje se stejně jako v~předchozích příkladech:
+Implementována je jen základní řada do \texttt{c$_{19}$h$_{40}$} a její uhlíkové zbytky. Obsluhuje se stejně jako v~předchozích příkladech:
 \begin{verbatim}
 ?- vstup(c,1,h,4).
 metan

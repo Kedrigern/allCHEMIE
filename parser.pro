@@ -135,6 +135,7 @@ vstup(Prvek, 1, Halogen, M) :-
 %--------
 vstup(h, Prvek, o, K) 	 :- vstup(h, 1, Prvek, 1, o, K).	/* Symlink */
 vstup(h, N, Prvek, o, K) :- vstup(h, N, Prvek, 1, o, K).	/* Symlink */
+vstup(h, 2, s, 1, o, 5 ) :- write('kyselina peroxosirova').
 vstup(h, N, Prvek, M, o, K) :-
 	member(M,[1,2,3]),			%% pocet prvku
 	member(N,[1,2,3,4,5,6]),		%% pocet vodiku	

@@ -19,9 +19,9 @@
 \newpage
 \section{Úvod}
 Celý program je velmi úzce spjat s~programovacím jazykem Prolog, který spadá do paradigmatu logického programování.
-To znamená, že kód se skládá z~predikátů nad databází již zadaných predikátů a snaží se doplnit všechny proměnné. 
-Nicméně věřím, že není nutné rozumnět Prologu pro to, aby jste si AllCHEMIi vylepšili či pochopili, co dělá.
-Zvlátště pak odborné části z~chemie jsou vysloveně jednoduché, složitější může být občas aritmetika dopočítávání sloučenin. 
+To znamená, že kód se skládá z~predikátů nad databází již pevně zadaných predikátů (faktů) a snaží se doplnit všechny proměnné. 
+Nicméně věřím, že není nutné podrobně rozumnět Prologu pro to, aby jste si AllCHEMIi vylepšili či pochopili, co dělá.
+Zvláště pak odborné části z~chemie jsou vysloveně jednoduché, složitější může být občas aritmetika dopočítávání sloučenin. 
 
 Pokud Prolog znáte, tak celý kód je velmi jasně napsaný a nejsou v~něm žádné zaludnosti ani složitá rekurze.
 
@@ -36,7 +36,7 @@ Oxid bude mít jistě 4 argumenty, dva budou prvky a dva počty výskytů. Naví
 kyslík. Oxid tedy bude zadefinován takto:
 
 \begin{verbatim}
-vstup( Prvek, N, o, M ). % zatim bez jakyhkoliv pravidel
+vstup( Prvek , N , o , M ). % zatim bez jakyhkoliv pravidel
 \end{verbatim}
 
 Důležité je dodržovat zásady jazyka Prolog -- proměnná je vždy velkým písmenem. Za znakem procenta je komentář, tam
@@ -49,7 +49,8 @@ member(N,[1,2]),
 member(M,[1,2,3,4,5,7]),
 \end{verbatim}
 
-Další věcí, kterou můžeme snadno ověřit jsou informace o~prvku. Na to máme predikát \texttt{prvek()/6}. 
+Další věcí, kterou můžeme snadno ověřit jsou informace o~prvku. Na to máme predikát \texttt{prvek()/6} (
+podrobný popis je např. v~uživateské příručce).  
 U~oxidu ověříme, že prvek není v~A8 skupině a jakých může nabývat oxid. čísel. Také si rovnou najdeme jeho 
 plné jméno.
 
@@ -81,11 +82,11 @@ write('oxid '),write(Jmeno),write('-'),write(Koncovka).
 \end{verbatim}
 
 Aritmetika není zrovna silnou a oblíbenou stránkou Prologu. Celou dobu jsme vlastně pracovali s~textovými
-řetězci (včetně: \texttt{memeber(N,[1,2,3])}) a až speciální predikát \texttt{is()}\footnote{
+řetězci (včetně: \texttt{member(N,[1,2,3])}) a až speciální predikát \texttt{is()}\footnote{
 Dokumentace SWI-Prologu: 
 \href{http://www.swi-prolog.org/pldoc/refman/}{http://www.swi-prolog.org/pldoc/refman/}}
 převedl řetězce na čísla a~začal s~nimi počítat. Jak vidíte, tak se chová normálně operátory jsou: 
-\texttt{$+$}, \texttt{$-$}, \texttt{*}, \texttt{/}, \texttt{//} (celočíselné), \texttt{=:=} (rovná se), \texttt{=\\=} (nerovná se).
+\texttt{$+$}, \texttt{$-$}, \texttt{*}, \texttt{/}, \texttt{//} (celočíselné), \texttt{=:=} (rovná se), \verb+=\=+ (nerovná se).
 
 \subsection{Kompletace}
 Nyní doděláme nezbytnosti okolo, ještě budeme potřebovat:
@@ -111,7 +112,7 @@ vstup( Prvek, N, o, M ) :-
 
 Co s~kódem udělat? Otevřeme si libovolný textový editor (ve Windows třeba Notepad)
 a vložíme ho. Soubor uložíme např. jako \texttt{mujOxid.pro} a ve stejné složce máme
-soubor \texttt{tabulka.pl}. Pak již soubor \texttt{mujOxid.pro} stačí spustit v~Linuxu
+soubor \texttt{tabulka.pro}. Pak již soubor \texttt{mujOxid.pro} stačí spustit v~Linuxu
 z~terminálu:
 \begin{verbatim}
 prolog -f mujOxid.pro
@@ -119,4 +120,20 @@ prolog -f mujOxid.pro
 ve Windows poklepáním na daný soubor. Samozřejmě je nutné mít nainstalovaný SWI-Prolog.
 
 \section{Soubory a logické členění programu}
+\begin{tabular}{l p{7cm}}
+\textbf{Soubor} & \textbf{Obsah} \\
+tabulka.pro & Obsahuje definice prvků a koncovek\\
+main.pro & Úvodní obrazka, integrovaná nápověda a kompozice zbylých souborů\\
+parser.pro & Predikáty pro převod z~chemického vzorce na slovní vyjádření\\
+nazvy.pro & Opačný převod\\
+anionty.pro & Definice aniontů (jak pevně definované, tak generické)\\
+kompozer.pro & Skládání kombinací pro sestavování sloučenin\\
+allchemie.sh & Jednoduchý shellovský skript pro spuštění v~UNIXových systémech\\
+\end{tabular}
+
+\section{Dodatky}
+\subsection{Editor}
+Pokud hledáte editor, který by byl shcopen zvýrazňovat syntaxi u~Prologu (či dokonce napovídat), 
+tak vás musím poněkud zklamat. Nejlepší podporu mají editory Gedit (standardní textový editor v~Gnome)
+a VIM a ty pouze dosti neohrabaně zvýrazňují část syntaxe.
 \end{document}

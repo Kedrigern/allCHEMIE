@@ -40,7 +40,7 @@ start :- nl,
    write('Zadejte:'),nl,
    tab(5), write('help(N).   Zobrazi napovedu. N nahradte cislem dle moznosti vysse.'),nl,
    tab(5), write('start.     Zobrazi tuto nabidku.'), nl, 
-   tab(5), write('halt.      Ukonci program.'), nl, nl,
+   tab(5), write('exit.      Ukonci program.'), nl, nl,
    tab(10), write('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~'), nl, nl.
 
 pryc :- halt.
@@ -74,8 +74,8 @@ help(3) :- write('# 3: Pro prevod slouzi predikat vstup(), kde je treba jako arg
 	write(' vstup(h,2,s,1,o,4).'),tab(2), write('kyselina sirova'), nl,
 	write(' vstup(h,3,p,1,o,4).'),tab(2), write('kyselina trihydrogen fosforecna'),nl,
 	write(' vstup(ca,1,s,1,o,4,1,*,5,h2o'), tab(1), write('pentahydrat siranu mednateho'),nl,
-write('Nekde jsou pripraveny zkratky a lze zadat treba: vstup(h,2,o), jinde ne. Snazil jsem se dodrzovat vseobecne konvence.'),
-nl, nl.
+	write('Nekde jsou pripraveny zkratky a lze zadat treba: vstup(h,2,o), jinde ne. Snazil jsem se dodrzovat vseobecne konvence.'),
+	nl, nl.
 
 help(4) :- write('# 4: Pro tuto moznost se vyuziva zakladni vlatnosti jazyka Prolog - backtracking. Staci tedy namisto nektereho atomu vlozit promennou, to jest jakykoliv vyraz zacinajici velkym pismenem a Prolog sam najde mozne atomy na danou pozici (lze pozadovat nalezeni i vice jak jedne promenne). Po zobrazeni odpovědi lze zadat středník a budou vyhledány další možnosti, jako v příkladu: '), nl, nl,
 	write(' ?- vstup(h,2,0,N).'),nl,
