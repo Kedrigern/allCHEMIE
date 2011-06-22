@@ -18,7 +18,7 @@
 \tableofcontents
 \newpage
 \section{Úvod}
-Program allChemie vznikl jako zápočtový roku 2010 a je psán v~jazyce Prolog. Slouží k~základní práci se vzorci převážně anorganické chemie. Přesněji řečeno má tyto základní možnosti užití:
+Program allChemie vznikl jako zápočtový roku 2011 a je psán v~jazyce Prolog. Slouží k~základní práci se vzorci převážně anorganické chemie. Přesněji řečeno má tyto základní možnosti užití:
 \begin{enumerate}
 \item Informace o~jednotlivých prvcích
 \item Koncovky českého názvosloví, řecké přípony etc.
@@ -87,6 +87,13 @@ Koncovky se používají obdobně jako predikát prvek z~předchozí kapitoly. P
 \begin{verbatim}
 koncovka( <cislo> , <pripon.> , <pripon. kys> , <pripon. sůl> ).
 \end{verbatim}
+Např. takto (2.-4. parametr jsou proměnné):
+\begin{verbatim}
+?- koncovka(2,Oxid,Kyselina,Sul).
+Oxid = naty,
+Kyselina = nata,
+Sul = natan.
+\end{verbatim}
 \subsection{Převod chem. vzorce na slovní vyjádření}
 Zde je důležitý predikát \texttt{vstup()}, který je silně přetížený -- tj. má proměnný počet parametrů (2-10). Stačí mu zadat kompletní vzorec (pro správnou funkci je třeba vyplnit všechna čísla vč. 1). Např:
 \begin{verbatim}
@@ -138,12 +145,19 @@ Pro sloučeniny jsou připraveny spec. predikáty. Nejjednoduší bude ukázat t
 co2
 ?- oxid(lithium,ny).
 li2o
+?- hydroxid(vapnik,naty).
+ca(oh)2
+?- hydroxid(sodik,ny).
+na(oh)
 ?- fluorid(draslik,ny).
 kf
 ?- bromid(sodik,ny).
 nabr
 ?- kyselina(brom,na).
 hbro
+?- kyselina(dusik,icna).
+hno3
+
 \end{verbatim}
 
 
@@ -156,7 +170,26 @@ X = n ;         oxid dusičitý
 X = si ;        oxid křemičitý
 X = s ;         oxid siřičitý
 ...
-\end{verbatim}
+?- vstup(c,X,h,Y).
+metan
+X = 1,
+Y = 4  ;
+metyl
+X = 1,
+Y = 3 ;
+etan
+X = 2,
+Y = 6 ;
+ethyl
+X = 2,
+Y = 5 ;
+propan
+X = 3,
+Y = 8 ;
+propyl
+X = 3,
+Y = 7 
+...\end{verbatim}
 Vynechat lze i více prvků, či četnost nějakého atomu.
 \subsection{Skládání sloučenin}
 Predikát \texttt{sloz()} jednoduše najde možné sloučeniny. Četnosti si doplňuje sám. 
