@@ -2,9 +2,9 @@
 
 
 **English info:** 	This program is for work with Czech chemistry systematical terminology. 
-		Translate to another language is useless, so is only in Czech.
+Translate to another language is useless, so is only in Czech.
 
-		Thanks for understandigs.
+Thanks for understandigs.
 
 ## OBSAH
 1. Instalace
@@ -26,8 +26,8 @@ Program spustíte příkazem: `prolog -q -f <cesta_k_souboru/main.pro>`
 popřípadě je přiložen shellovský skript: `./allchemie.sh`
 
 ## Odkazy
-* [Stránka projektu](http://kedrigern.github.com/allCHEMIE)
-* [Kompletní dokumentací]()
+* [Stránka projektu](https://kedrigern.github.com/allCHEMIE)
+* [Kompletní dokumentací](https://github.com/Kedrigern/allCHEMIE/doc)
 
 ## Author
 Ondřej Profant, 2011
