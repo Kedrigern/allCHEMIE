@@ -27,7 +27,7 @@ popřípadě je přiložen shellovský skript: `./allchemie.sh`
 
 ## Odkazy
 * [Stránka projektu](https://kedrigern.github.com/allCHEMIE)
-* [Kompletní dokumentací](https://github.com/Kedrigern/allCHEMIE/doc)
+* [Kompletní dokumentací](https://github.com/Kedrigern/allCHEMIE/master/doc)
 
 ## Author
 Ondřej Profant, 2011
